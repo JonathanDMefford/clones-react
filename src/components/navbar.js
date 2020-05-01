@@ -4,7 +4,7 @@ import './nav.css';
 
 function Navbar(props) {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light border-bottom bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light border-bottom mb-5 bg-light">
             <a className="navbar-brand" href="#">
                 <img src={process.env.PUBLIC_URL + '/twitchlogo.png'} width="30" height="30" alt="" />
                 Twitch

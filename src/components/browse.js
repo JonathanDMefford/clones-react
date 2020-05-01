@@ -1,9 +1,10 @@
 import React from 'react';
+import Category from './category';
 import { Container, Row, Col } from 'reactstrap';
-const axios = require('axios');
+import axios from 'axios';
 
 
-class Category extends React.Component {
+class Browse extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -11,11 +12,11 @@ class Category extends React.Component {
         }
     }
 
-    async displayCategories() {
+    async componentDidMount() {
         let result = await axios.get('http://127.0.0.1:8000/api/categories')
             .then(function (response) {
                 console.log(response);
-                return response.data;
+                return response.data.data;
             })
             .catch(function (error) {
                 // handle error
@@ -24,24 +25,27 @@ class Category extends React.Component {
             .finally(function () {
                 // always executed
             });
-        
+
         console.log(result)
         this.setState({
             categories: result
         });
     }
 
-    componentDidMount() {
-        
-    }
-
     render() {
         return (
             <Container>
-                
+                <Row>
+                    {this.state.categories.map((item, idx) =>
+                    <Category
+                    key={idx}
+                    catdata={item}
+                    />
+                    )}
+                </Row>
             </Container>
         );
     }
 }
 
-export default Category
+export default Browse

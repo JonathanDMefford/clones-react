@@ -1,13 +1,13 @@
 import React from 'react';
 import Navbar from './components/navbar';
-import Category from './components/browse';
-// import './App.css';
+import Browse from './components/browse';
+
 
 function App(props) {
   return (
-    <div className='container'>
+    <div>
       <Navbar />
-      <Category />
+      <Browse />
     </div>
   );
 }
