@@ -26,7 +26,7 @@ class Browse extends React.Component {
                 // always executed
             });
 
-        console.log(result)
+        console.log(result, 'result');
         this.setState({
             categories: result
         });
