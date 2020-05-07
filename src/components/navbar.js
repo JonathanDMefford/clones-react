@@ -1,12 +1,18 @@
-import React, {useState} from 'react';
-import Login from './login';
+import React, { useState } from 'react';
+import Account from './account';
 import './nav.css';
 
 
 function Navbar(props) {
-    
+
     const [modal, setModal] = useState(false);
+    const [activeTab, setActiveTab] = useState('login');
     const toggle = () => setModal(!modal);
+
+    function openModal(props) {
+        setActiveTab(props)
+        toggle()
+    }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light border-bottom mb-5 bg-light">
@@ -30,12 +36,14 @@ function Navbar(props) {
                     <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
                     <button className="btn btn-outline-primary my-2 my-sm-0" id="search" type="submit">Search</button>
                 </form>
-                <Login 
+                <Account 
                     modal={modal}
                     toggle={toggle}
+                    activeTab={activeTab}
+                    setActiveTab={setActiveTab}
                 />
-                <button className="btn my-2 ml-5 font-weight-bold my-sm-0" onClick={toggle} id="register" type="submit">Sign Up</button>
-                <button className="btn my-2 ml-2 font-weight-bold my-sm-0" onClick={toggle} id="login" type="submit">Login</button>
+                <button className="btn my-2 ml-5 font-weight-bold my-sm-0" onClick={() => openModal('login')} id="login" type="submit">Login</button>
+                <button className="btn my-2 mx-2 font-weight-bold my-sm-0" onClick={() => openModal('register')} id="register" type="submit">Sign Up</button>
             </div>
         </nav>
     );
