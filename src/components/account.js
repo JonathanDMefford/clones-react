@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { Nav, NavItem, NavLink, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Nav, NavItem, NavLink, Form, FormGroup, Label, Input } from 'reactstrap';
 
 
 function Account(props) {
@@ -14,13 +14,14 @@ function Account(props) {
     const userLogin = () => {
 
         const data = {
-            email: '',
-            password: ''
+            email: email,
+            password: password
         }
 
         axios.post('http://127.0.0.1:8000/api/login', data)
             .then(function (response) {
-                console.log(response);
+                console.log(response, 'login');
+                props.setToken(response.data.token);
                 return response.data.data;
             })
             .catch(function (error) {
@@ -30,21 +31,23 @@ function Account(props) {
             .finally(function () {
                 // always executed
             });
-            props.toggle()
+            // console.log(result, 'result');
+            props.setIsLoggedIn(true);
+            props.toggle();
     }
 
     const userRegister = () => {
 
-        const data ={
-            name: '',
-            email: '',
-            password: '',
-            confirmPassword: ''
+        const data = {
+            name: name,
+            email: email,
+            password: password,
+            // confirmPassword: confirmPassword
         }
 
         axios.post('http://127.0.0.1:8000/api/register', data)
             .then(function (response) {
-                console.log(response);
+                console.log(response, 'register');
                 return response.data.data;
             })
             .catch(function (error) {
@@ -54,7 +57,7 @@ function Account(props) {
             .finally(function () {
                 // always executed
             });
-            props.toggle()
+            props.toggle();
     }
 
     return (
@@ -63,14 +66,14 @@ function Account(props) {
             <Nav tabs>
                 <NavItem>
                     <NavLink
-                        className={props.activeTab == 'login' ? 'active' : ''}
+                        className={props.activeTab === 'login' ? 'active' : ''}
                         onClick={() => props.setActiveTab('login')}>
                         Log In
                     </NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink
-                        className={props.activeTab == 'register' ? 'active' : ''}
+                        className={props.activeTab === 'register' ? 'active' : ''}
                         onClick={() => props.setActiveTab('register')}>
                         Sign Up
                     </NavLink>
@@ -78,28 +81,28 @@ function Account(props) {
             </Nav>
             <ModalBody>
                 <Form>
-                    {props.activeTab == 'register' ?
+                    {props.activeTab === 'register' ?
                         <FormGroup>
                             <Label for="exampleName">Name</Label>
-                            <Input type="name" name="name" id="exampleName" placeholder="Enter name" />
+                            <Input onChange={(e) => setName(e.target.value)} type="name" value={name} name="name" id="exampleName" placeholder="Enter name" />
                         </FormGroup> : null}
                     <FormGroup>
                         <Label for="exampleEmail">Email</Label>
-                        <Input type="email" name="email" id="exampleEmail" placeholder="Enter email" />
+                        <Input onChange={(e) => setEmail(e.target.value)} type="email" value={email} name="email" id="exampleEmail" placeholder="Enter email" />
                     </FormGroup>
                     <FormGroup>
                         <Label for="examplePassword">Password</Label>
-                        <Input type="password" name="password" id="examplePassword" placeholder="Enter password" />
+                        <Input onChange={(e) => setPassword(e.target.value)} type="password" value={password} name="password" id="examplePassword" placeholder="Enter password" />
                     </FormGroup>
-                    {props.activeTab == 'register' ?
+                    {props.activeTab === 'register' ?
                         <FormGroup>
                             <Label for="exampleConfirmPassword">Confirm Password</Label>
-                            <Input type="confirmPassword" name="confirmPassword" id="exampleConfirmPassword" placeholder="Re-enter Password" />
+                            <Input onChange={(e) => setConfirmPassword(e.target.value)} type="confirmPassword" value={confirmPassword} name="confirmPassword" id="exampleConfirmPassword" placeholder="Re-enter Password" />
                         </FormGroup> : null}
                 </Form>
             </ModalBody>
             <ModalFooter>
-                {props.activeTab == 'register' ?
+                {props.activeTab === 'register' ?
                     <Button id="register" className="font-weight-bold" onClick={userRegister} block>Sign Up</Button>
                     :
                     <Button id="register" className="font-weight-bold" onClick={userLogin} block>Log In</Button>}

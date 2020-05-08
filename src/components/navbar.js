@@ -1,17 +1,41 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import Account from './account';
 import './nav.css';
 
 
 function Navbar(props) {
 
+    const [token, setToken] = useState('');
     const [modal, setModal] = useState(false);
     const [activeTab, setActiveTab] = useState('login');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const toggle = () => setModal(!modal);
 
     function openModal(props) {
         setActiveTab(props)
         toggle()
+    }
+
+    const userLogout = () => {
+
+        const data = {
+            headers: {Authorization: "Bearer " + token}
+        }
+        console.log(data);
+        axios.post('http://127.0.0.1:8000/api/logout', data)
+            .then(function (response) {
+                console.log(response, 'logout');
+                return response.data.data;
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+            });
+            setIsLoggedIn(false);
     }
 
     return (
@@ -36,14 +60,21 @@ function Navbar(props) {
                     <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
                     <button className="btn btn-outline-primary my-2 my-sm-0" id="search" type="submit">Search</button>
                 </form>
-                <Account 
+                <Account
                     modal={modal}
                     toggle={toggle}
                     activeTab={activeTab}
                     setActiveTab={setActiveTab}
+                    setIsLoggedIn={setIsLoggedIn}
+                    setToken={setToken}
                 />
-                <button className="btn my-2 ml-5 font-weight-bold my-sm-0" onClick={() => openModal('login')} id="login" type="submit">Login</button>
-                <button className="btn my-2 mx-2 font-weight-bold my-sm-0" onClick={() => openModal('register')} id="register" type="submit">Sign Up</button>
+                {isLoggedIn
+                    ? <button className="btn my-2 ml-5 font-weight-bold my-sm-0" onClick={userLogout} id="logout" type="submit">Logout</button> :
+                    <React.Fragment>
+                        <button className="btn my-2 ml-5 font-weight-bold my-sm-0" onClick={() => openModal('login')} id="login" type="submit">Login</button>
+                        <button className="btn my-2 mx-2 font-weight-bold my-sm-0" onClick={() => openModal('register')} id="register" type="submit">Sign Up</button>
+                    </React.Fragment>
+                }
             </div>
         </nav>
     );
