@@ -20,7 +20,7 @@ function Account(props) {
 
         axios.post('http://127.0.0.1:8000/api/login', data)
             .then(function (response) {
-                console.log(response, 'login');
+                console.log(response.data, 'login');
                 props.setToken(response.data.token);
                 return response.data.data;
             })
@@ -31,7 +31,7 @@ function Account(props) {
             .finally(function () {
                 // always executed
             });
-            // console.log(result, 'result');
+
             props.setIsLoggedIn(true);
             props.toggle();
     }

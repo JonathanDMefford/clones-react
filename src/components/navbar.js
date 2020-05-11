@@ -23,7 +23,7 @@ function Navbar(props) {
             headers: {Authorization: "Bearer " + token}
         }
         console.log(data);
-        axios.post('http://127.0.0.1:8000/api/logout', data)
+        axios.get('http://127.0.0.1:8000/api/logout', data)
             .then(function (response) {
                 console.log(response, 'logout');
                 return response.data.data;
