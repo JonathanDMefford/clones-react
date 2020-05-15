@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios';
 import Account from './account';
@@ -8,14 +8,13 @@ import './nav.css';
 
 function Navbar(props) {
 
-    const [user, setUser] = useState({});
-    const [token, setToken] = useState('');
     const [modal, setModal] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [activeTab, setActiveTab] = useState('login');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const toggle = () => setModal(!modal);
     const dropToggle = () => setDropdownOpen(!dropdownOpen);
+    const history = useHistory();
 
     function openModal(props) {
         setActiveTab(props)
@@ -25,7 +24,7 @@ function Navbar(props) {
     const userLogout = () => {
 
         const data = {
-            headers: { Authorization: "Bearer " + token }
+            headers: { Authorization: "Bearer " + props.token }
         }
         console.log(data);
         axios.get('http://127.0.0.1:8000/api/logout', data)
@@ -35,8 +34,9 @@ function Navbar(props) {
             })
             .catch(function (error) {
                 // handle error
-                console.log(error);
-            })
+                console.log(error)
+            });
+            history.push("/");
     }
 
     return (
@@ -67,18 +67,19 @@ function Navbar(props) {
                     activeTab={activeTab}
                     setActiveTab={setActiveTab}
                     setIsLoggedIn={setIsLoggedIn}
-                    user={user}
-                    setUser={setUser}
-                    token={token}
-                    setToken={setToken}
+                    user={props.user}
+                    setUser={props.setUser}
+                    token={props.token}
+                    setToken={props.setToken}
                 />
                 {isLoggedIn ?
                     <Dropdown className="ml-5 mr-2" direction="down" isOpen={dropdownOpen} toggle={dropToggle}>
                         <DropdownToggle id="register">
-                            {user.name}
+                            {props.user.name}
                         </DropdownToggle>
                         <DropdownMenu>
-                            <DropdownItem>View Profile</DropdownItem>
+                            <DropdownItem>
+                            <Link to="/profile">View Profile</Link></DropdownItem>
                             <DropdownItem onClick={userLogout}>Logout</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>

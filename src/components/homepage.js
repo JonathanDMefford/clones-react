@@ -10,6 +10,7 @@ import {
 function Homepage(props) {
 
     const channels = props.channelData.filter((channel, index) => index < 12);
+    const categories = props.catData.filter((category, index) => index < 12);
 
     return (
         <div className="mx-5 mb-5">
@@ -31,15 +32,16 @@ function Homepage(props) {
                 <h5><Link to="/browse">Categories</Link> we think you'll like</h5>
             </Row>
             <Row>
+                {categories.map((category, idx) =>
                 <Col xs="2">
-                    <Card>
-                        <CardImg top width="100%" src="" alt="Card image cap" />
+                    <Card className="mb-4">
+                        <CardImg top width="100%" src={category.image} alt="Card image cap" />
                         <CardBody>
-                            <CardTitle>Card title</CardTitle>
-                            <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                            <CardTitle className="text-center"><strong><a className="channelLink" href="#">{category.title}</a></strong></CardTitle>
                         </CardBody>
                     </Card>
                 </Col>
+                )}
             </Row>
         </div>
     );
