@@ -21,19 +21,16 @@ function Account(props) {
         axios.post('http://127.0.0.1:8000/api/login', data)
             .then(function (response) {
                 console.log(response.data, 'login');
+                props.setUser(response.data.user);
                 props.setToken(response.data.token);
-                return response.data.data;
+                props.setIsLoggedIn(response.data.token ? true : false);
+                props.toggle();
+
             })
             .catch(function (error) {
                 // handle error
                 console.log(error);
             })
-            .finally(function () {
-                // always executed
-            });
-
-            props.setIsLoggedIn(true);
-            props.toggle();
     }
 
     const userRegister = () => {
@@ -48,16 +45,12 @@ function Account(props) {
         axios.post('http://127.0.0.1:8000/api/register', data)
             .then(function (response) {
                 console.log(response, 'register');
-                return response.data.data;
+                props.toggle();
             })
             .catch(function (error) {
                 // handle error
                 console.log(error);
             })
-            .finally(function () {
-                // always executed
-            });
-            props.toggle();
     }
 
     return (

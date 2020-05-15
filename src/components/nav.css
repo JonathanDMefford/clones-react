@@ -3,10 +3,28 @@
 }
 
 #register {
-    background-color: rgb(133, 34, 146);
+    background-color: #8038ec;
     color: white;
 }
 
 #logout {
     background-color: rgb(197, 203, 209);
+}
+
+a.userLink {
+    color: black;
+}
+
+a.userLink:hover {
+    color: #772ce8;
+    text-decoration: none;
+}
+
+a.channelLink {
+    color: black;
+}
+
+a.channelLink:hover {
+    color: #772ce8;
+    text-decoration: none;
 }

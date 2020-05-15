@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios';
 import Account from './account';
 import './nav.css';
@@ -6,11 +8,14 @@ import './nav.css';
 
 function Navbar(props) {
 
+    const [user, setUser] = useState({});
     const [token, setToken] = useState('');
     const [modal, setModal] = useState(false);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
     const [activeTab, setActiveTab] = useState('login');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const toggle = () => setModal(!modal);
+    const dropToggle = () => setDropdownOpen(!dropdownOpen);
 
     function openModal(props) {
         setActiveTab(props)
@@ -20,27 +25,23 @@ function Navbar(props) {
     const userLogout = () => {
 
         const data = {
-            headers: {Authorization: "Bearer " + token}
+            headers: { Authorization: "Bearer " + token }
         }
         console.log(data);
         axios.get('http://127.0.0.1:8000/api/logout', data)
             .then(function (response) {
                 console.log(response, 'logout');
-                return response.data.data;
+                setIsLoggedIn(false);
             })
             .catch(function (error) {
                 // handle error
                 console.log(error);
             })
-            .finally(function () {
-                // always executed
-            });
-            setIsLoggedIn(false);
     }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light border-bottom mb-5 bg-light">
-            <a className="navbar-brand" href="#">
+            <a className="navbar-brand" href="">
                 <img src={process.env.PUBLIC_URL + '/images/twitchlogo.png'} width="30" height="30" alt="" />
                 Twitch
             </a>
@@ -50,10 +51,10 @@ function Navbar(props) {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
+                        <Link to="/" className="nav-link">Home <span className="sr-only">(current)</span></Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Browse</a>
+                        <Link to="/browse" className="nav-link">Browse</Link>
                     </li>
                 </ul>
                 <form className="form-inline">
@@ -66,10 +67,22 @@ function Navbar(props) {
                     activeTab={activeTab}
                     setActiveTab={setActiveTab}
                     setIsLoggedIn={setIsLoggedIn}
+                    user={user}
+                    setUser={setUser}
+                    token={token}
                     setToken={setToken}
                 />
-                {isLoggedIn
-                    ? <button className="btn my-2 ml-5 font-weight-bold my-sm-0" onClick={userLogout} id="logout" type="submit">Logout</button> :
+                {isLoggedIn ?
+                    <Dropdown className="ml-5 mr-2" direction="down" isOpen={dropdownOpen} toggle={dropToggle}>
+                        <DropdownToggle id="register">
+                            {user.name}
+                        </DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem>View Profile</DropdownItem>
+                            <DropdownItem onClick={userLogout}>Logout</DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
+                    :
                     <React.Fragment>
                         <button className="btn my-2 ml-5 font-weight-bold my-sm-0" onClick={() => openModal('login')} id="login" type="submit">Login</button>
                         <button className="btn my-2 mx-2 font-weight-bold my-sm-0" onClick={() => openModal('register')} id="register" type="submit">Sign Up</button>
