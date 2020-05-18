@@ -2,6 +2,10 @@
     background-color: rgb(197, 203, 209);
 }
 
+#profile {
+    color: #772ce8;
+}
+
 #register {
     background-color: #8038ec;
     color: white;
@@ -27,4 +31,11 @@ a.channelLink {
 a.channelLink:hover {
     color: #772ce8;
     text-decoration: none;
+}
+
+#live {
+    color: #772ce8;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    padding-bottom: 15px;
 }

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
 import Account from './account';
 import './nav.css';
@@ -75,11 +77,11 @@ function Navbar(props) {
                 {isLoggedIn ?
                     <Dropdown className="ml-5 mr-2" direction="down" isOpen={dropdownOpen} toggle={dropToggle}>
                         <DropdownToggle id="register">
-                            {props.user.name}
+                            <FontAwesomeIcon icon={faUser}/>
                         </DropdownToggle>
-                        <DropdownMenu>
+                        <DropdownMenu right>
                             <DropdownItem>
-                            <Link to="/profile">View Profile</Link></DropdownItem>
+                            <Link to="/profile" id="profile">{props.user.name}</Link></DropdownItem>
                             <DropdownItem onClick={userLogout}>Logout</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>

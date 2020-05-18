@@ -37,7 +37,7 @@ function Homepage(props) {
                     <Card className="mb-4">
                         <CardImg top width="100%" src={category.image} alt="Card image cap" />
                         <CardBody>
-                            <CardTitle className="text-center"><strong><a className="channelLink" href="#">{category.title}</a></strong></CardTitle>
+                            <CardTitle className="text-center"><strong><Link to="/category" className="channelLink">{category.title}</Link></strong></CardTitle>
                         </CardBody>
                     </Card>
                 </Col>

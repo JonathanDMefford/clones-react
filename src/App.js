@@ -4,6 +4,8 @@ import Homepage from './components/homepage';
 import Navbar from './components/navbar';
 import Browse from './components/browse';
 import Profile from './components/profilepage';
+import CategoryPage from './components/categorypage';
+import ChannelPage from './components/channelpage';
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,7 +22,7 @@ function App(props) {
   const [catData, setCatData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/channels/promoted')
+    axios.get('http://127.0.0.1:8000/api/channels')
       .then(function (response) {
         console.log(response.data.data, 'channel data');
         setChannelData(response.data.data);
@@ -62,6 +64,11 @@ function App(props) {
           <Route path="/browse">
             <Browse
             categories={catData}
+            />
+          </Route>
+          <Route path ="/category">
+            <CategoryPage
+              data={channelData}
             />
           </Route>
           <Route path="/profile">
