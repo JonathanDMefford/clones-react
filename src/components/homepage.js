@@ -26,6 +26,7 @@ function Homepage(props) {
                         key={idx}
                         channelData={item}
                         setCategoryPage={props.setCategoryPage}
+                        setChannelPage={props.setChannelPage}
                     />
                 )}
             </Row>

@@ -33,6 +33,14 @@ a.channelLink:hover {
     text-decoration: none;
 }
 
+a.catLink {
+    color: #772ce8;
+}
+
+a.catLink:hover {
+    text-decoration: underline;
+}
+
 #live {
     color: #772ce8;
     border-bottom-width: 2px;

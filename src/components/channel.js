@@ -11,7 +11,7 @@ function Channel(props) {
         <Card className="mb-4" style={{ height: "340px" }}>
             <CardImg top width="100%" src={process.env.PUBLIC_URL + '/images/placeholder.jpg'} width="30" height="180" alt="Card image cap" />
             <CardBody>
-                <CardTitle><strong><Link to="#" className="channelLink">{props.channelData.title ? props.channelData.title : null}</Link></strong></CardTitle>
+                <CardTitle><strong><Link to="/channel" onClick={() => props.setChannelPage(props.channelData.id)} className="channelLink">{props.channelData.title ? props.channelData.title : null}</Link></strong></CardTitle>
                 <CardText>
                     <Link to="#" className="userLink" href="#">{props.channelData.user.name}</Link>
                     <br></br>

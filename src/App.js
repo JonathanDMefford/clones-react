@@ -9,8 +9,7 @@ import ChannelPage from './components/channelpage';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 
@@ -59,23 +58,33 @@ function App(props) {
         <Switch>
           <Route exact path="/">
             <Homepage
-            catData={catData}
-            channelData={channelData}
-            setCategoryPage={setCategoryPage}
+              catData={catData}
+              channelData={channelData}
+              setCategoryPage={setCategoryPage}
+              setChannelPage={setChannelPage}
             />
           </Route>
           <Route path="/browse">
             <Browse
-            categories={catData}
-            data={channelData}
-            setCategoryPage={setCategoryPage}
+              categories={catData}
+              data={channelData}
+              setCategoryPage={setCategoryPage}
             />
           </Route>
-          <Route path ="/category">
+          <Route path="/category">
             <CategoryPage
               catData={catData}
               data={channelData}
+              setChannelPage={setChannelPage}
               categoryPage={categoryPage}
+            />
+          </Route>
+          <Route path="/channel">
+            <ChannelPage
+              data={channelData}
+              setCategoryPage={setCategoryPage}
+              categoryPage={categoryPage}
+              channelPage={channelPage}
             />
           </Route>
           <Route path="/profile">
