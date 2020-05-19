@@ -20,6 +20,8 @@ function App(props) {
   const [token, setToken] = useState('');
   const [channelData, setChannelData] = useState([]);
   const [catData, setCatData] = useState([]);
+  const [categoryPage, setCategoryPage] = useState(0);
+  const [channelPage, setChannelPage] = useState(0);
 
   useEffect(() => {
     axios.get('http://127.0.0.1:8000/api/channels')
@@ -59,16 +61,21 @@ function App(props) {
             <Homepage
             catData={catData}
             channelData={channelData}
+            setCategoryPage={setCategoryPage}
             />
           </Route>
           <Route path="/browse">
             <Browse
             categories={catData}
+            data={channelData}
+            setCategoryPage={setCategoryPage}
             />
           </Route>
           <Route path ="/category">
             <CategoryPage
+              catData={catData}
               data={channelData}
+              categoryPage={categoryPage}
             />
           </Route>
           <Route path="/profile">

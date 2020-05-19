@@ -9,6 +9,7 @@ function Browse(props) {
             <Row>
                 {props.categories.map((item, idx) =>
                     <Category
+                        setCategoryPage={props.setCategoryPage}
                         key={idx}
                         catdata={item}
                     />

@@ -8,7 +8,7 @@ import {
 
 
 function Homepage(props) {
-
+    // console.log(props.catData[0].id, 'homepage');
     const channels = props.channelData.filter((channel, index) => index < 12);
     const categories = props.catData.filter((category, index) => index < 12);
 
@@ -25,6 +25,7 @@ function Homepage(props) {
                     <Channel
                         key={idx}
                         channelData={item}
+                        setCategoryPage={props.setCategoryPage}
                     />
                 )}
             </Row>
@@ -37,7 +38,7 @@ function Homepage(props) {
                     <Card className="mb-4">
                         <CardImg top width="100%" src={category.image} alt="Card image cap" />
                         <CardBody>
-                            <CardTitle className="text-center"><strong><Link to="/category" className="channelLink">{category.title}</Link></strong></CardTitle>
+                            <CardTitle className="text-center"><strong><Link to="/category" onClick={() => props.setCategoryPage(category.id)} className="channelLink">{category.title}</Link></strong></CardTitle>
                         </CardBody>
                     </Card>
                 </Col>
