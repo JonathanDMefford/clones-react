@@ -43,7 +43,7 @@ function Navbar(props) {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light border-bottom mb-5 bg-light">
-            <a className="navbar-brand" href="">
+            <a className="navbar-brand" href="#">
                 <img src={process.env.PUBLIC_URL + '/images/twitchlogo.png'} width="30" height="30" alt="" />
                 Twitch
             </a>

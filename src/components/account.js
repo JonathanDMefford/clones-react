@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Nav, NavItem, NavLink, Form, FormGroup, Label, Input } from 'reactstrap';
@@ -10,6 +11,7 @@ function Account(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const history = useHistory();
 
     const userLogin = () => {
 
@@ -31,6 +33,7 @@ function Account(props) {
                 // handle error
                 console.log(error);
             })
+            history.push("/");
     }
 
     const userRegister = () => {

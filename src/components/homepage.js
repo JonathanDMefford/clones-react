@@ -35,14 +35,16 @@ function Homepage(props) {
             </Row>
             <Row>
                 {categories.map((category, idx) =>
-                <Col xs="2">
-                    <Card className="mb-4">
-                        <CardImg top width="100%" src={category.image} alt="Card image cap" />
-                        <CardBody>
-                            <CardTitle className="text-center"><strong><Link to="/category" onClick={() => props.setCategoryPage(category.id)} className="channelLink">{category.title}</Link></strong></CardTitle>
-                        </CardBody>
-                    </Card>
-                </Col>
+                    <Col xs="2">
+                        <Card className="mb-4">
+                            <CardImg top width="100%" src={category.image} alt="Card image cap" />
+                            <CardBody>
+                                <CardTitle className="text-center"><strong><Link to="/category" onClick={() => props.setCategoryPage(category.id)}
+                                    className="channelLink">{category.title}</Link></strong>
+                                </CardTitle>
+                            </CardBody>
+                        </Card>
+                    </Col>
                 )}
             </Row>
         </div>

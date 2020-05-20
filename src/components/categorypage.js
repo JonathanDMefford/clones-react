@@ -34,9 +34,12 @@ function CategoryPage(props) {
                             return (
                                 <Col xs="2">
                                     <Card className="mb-4" style={{ height: "340px" }}>
-                                        <CardImg top width="100%" src={process.env.PUBLIC_URL + '/images/placeholder.jpg'} width="30" height="180" alt="Card image cap" />
+                                        <CardImg top width="100%" src={process.env.PUBLIC_URL + '/images/placeholder.jpg'}
+                                            width="30" height="180" alt="Card image cap" />
                                         <CardBody>
-                                            <CardTitle><strong><Link to="/channel" onClick={() => props.setChannelPage(channel.id)} className="channelLink">{channel.title}</Link></strong></CardTitle>
+                                            <CardTitle><strong><Link to="/channel" onClick={() => props.setChannelPage(channel.id)}
+                                                className="channelLink">{channel.title}</Link></strong>
+                                            </CardTitle>
                                             <CardText>
                                                 <Link to="#" className="userLink">{channel.user.name}</Link>
                                             </CardText>
