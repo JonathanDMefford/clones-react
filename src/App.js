@@ -4,6 +4,7 @@ import Homepage from './components/homepage';
 import Navbar from './components/navbar';
 import Browse from './components/browse';
 import Profile from './components/profilepage';
+import AdminPage from './components/adminpage';
 import CategoryPage from './components/categorypage';
 import ChannelPage from './components/channelpage';
 import {
@@ -21,9 +22,10 @@ function App(props) {
   const [catData, setCatData] = useState([]);
   const [categoryPage, setCategoryPage] = useState(0);
   const [channelPage, setChannelPage] = useState(0);
+  const API_ENDPOINT = "https://twitch-clone-277819.uc.r.appspot.com";
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/channels')
+    axios.get(API_ENDPOINT + '/api/channels')
       .then(function (response) {
         console.log(response.data.data, 'channel data');
         setChannelData(response.data.data);
@@ -35,7 +37,7 @@ function App(props) {
   }, []);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/categories')
+    axios.get(API_ENDPOINT + '/api/categories')
       .then(function (response) {
         console.log(response.data.data, 'category data');
         setCatData(response.data.data);
@@ -90,6 +92,12 @@ function App(props) {
           <Route path="/profile">
             <Profile
               user={user}
+              data={channelData}
+            />
+          </Route>
+          <Route path="/admin">
+            <AdminPage
+              data={channelData}
             />
           </Route>
         </Switch>

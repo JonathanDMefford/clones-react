@@ -12,6 +12,7 @@ function Account(props) {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const history = useHistory();
+    const API_ENDPOINT = "https://twitch-clone-277819.uc.r.appspot.com";
 
     const userLogin = () => {
 
@@ -20,7 +21,7 @@ function Account(props) {
             password: password
         }
 
-        axios.post('http://127.0.0.1:8000/api/login', data)
+        axios.post(API_ENDPOINT + '/api/login', data)
             .then(function (response) {
                 console.log(response.data, 'login');
                 props.setUser(response.data.user);
@@ -45,7 +46,7 @@ function Account(props) {
             // confirmPassword: confirmPassword
         }
 
-        axios.post('http://127.0.0.1:8000/api/register', data)
+        axios.post(API_ENDPOINT + '/api/register', data)
             .then(function (response) {
                 console.log(response, 'register');
                 props.toggle();

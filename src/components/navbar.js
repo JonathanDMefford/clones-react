@@ -17,6 +17,7 @@ function Navbar(props) {
     const toggle = () => setModal(!modal);
     const dropToggle = () => setDropdownOpen(!dropdownOpen);
     const history = useHistory();
+    const API_ENDPOINT = "https://twitch-clone-277819.uc.r.appspot.com";
 
     function openModal(props) {
         setActiveTab(props)
@@ -29,7 +30,7 @@ function Navbar(props) {
             headers: { Authorization: "Bearer " + props.token }
         }
         console.log(data);
-        axios.get('http://127.0.0.1:8000/api/logout', data)
+        axios.get(API_ENDPOINT + '/api/logout', data)
             .then(function (response) {
                 console.log(response, 'logout');
                 setIsLoggedIn(false);
@@ -80,9 +81,12 @@ function Navbar(props) {
                             <FontAwesomeIcon icon={faUser}/>
                         </DropdownToggle>
                         <DropdownMenu right>
-                            <DropdownItem>
-                            <Link to="/profile" id="profile">{props.user.name}</Link></DropdownItem>
-                            <DropdownItem onClick={userLogout}>Logout</DropdownItem>
+                            <DropdownItem id="profile">{props.user.name}</DropdownItem>
+                            <DropdownItem><Link to="/profile" id="profile">Settings</Link></DropdownItem>
+                            {props.user.name === "admin" ?
+                            <DropdownItem><Link to="/admin" id="profile">Admin Page</Link></DropdownItem>
+                            : null}
+                            <DropdownItem id="profile" onClick={userLogout}>Logout</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
                     :
