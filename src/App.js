@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Homepage from './components/homepage';
-import Navbar from './components/navbar';
+import Navbarmenu from './components/navbar';
 import Browse from './components/browse';
 import Profile from './components/profilepage';
 import AdminPage from './components/adminpage';
@@ -51,7 +51,7 @@ function App(props) {
   return (
     <Router>
       <div>
-        <Navbar
+        <Navbarmenu
           user={user}
           setUser={setUser}
           token={token}
