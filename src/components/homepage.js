@@ -35,9 +35,9 @@ function Homepage(props) {
             </Row>
             <Row>
                 {categories.map((category, idx) =>
-                    <Col xs="2">
+                    <Col xs="12" sm="6" md="4" lg="2">
                         <Card className="mb-4">
-                            <CardImg top width="100%" src={category.image} alt="Card image cap" />
+                            <CardImg className="img-fluid" src={category.image} alt="Card image cap" />
                             <CardBody>
                                 <CardTitle className="text-center"><strong><Link to="/category" onClick={() => props.setCategoryPage(category.id)}
                                     className="channelLink">{category.title}</Link></strong>

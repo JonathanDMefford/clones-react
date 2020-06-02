@@ -20,7 +20,7 @@ function CategoryPage(props) {
             {channels ? (
                 <>
                     <Row className="mb-5">
-                        <img src={category.image} style={{ width: '18rem' }} />
+                        <img src={category.image} style={{ maxHeight: "240px" }}className="img-fluid"/>
                         <Col className="mt-5 ml-3">
                             <h1 className="mb-4">{category.title}</h1>
                             <Button className="font-weight-bold" id="register"><FontAwesomeIcon className="mr-2" icon={faHeart} />Follow</Button>
@@ -32,16 +32,16 @@ function CategoryPage(props) {
                     <Row className="mt-4">
                         {channels.map((channel, index) => {
                             return (
-                                <Col xs="2">
-                                    <Card className="mb-4" style={{ height: "340px" }}>
-                                        <CardImg top width="100%" src={process.env.PUBLIC_URL + '/images/placeholder.jpg'}
-                                            width="30" height="180" alt="Card image cap" />
+                                <Col xs="12" sm="6" md="4" lg="2" >
+                                    <Card className="mb-4" style={{ height: "30vh" }}>
+                                        <CardImg className="img-fluid"src={process.env.PUBLIC_URL + '/images/placeholder.jpg'}
+                                            alt="Card image cap" />
                                         <CardBody>
                                             <CardTitle><strong><Link to="/channel" onClick={() => props.setChannelPage(channel.id)}
-                                                className="channelLink">{channel.title}</Link></strong>
+                                                className="channelLink text-truncate">{channel.title}</Link></strong>
                                             </CardTitle>
                                             <CardText>
-                                                <Link to="#" className="userLink">{channel.user.name}</Link>
+                                                <Link to="#" className="userLink text-truncate">{channel.user.name}</Link>
                                             </CardText>
                                         </CardBody>
                                     </Card>

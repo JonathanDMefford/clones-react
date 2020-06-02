@@ -37,7 +37,7 @@ function Profile(props) {
                 <TabPane tabId="1">
                     <h4 className="mb-4">Profile Picture</h4>
                     <Row className="mb-5 border p-3">
-                        <img className="border rounded-circle mr-3" src={process.env.PUBLIC_URL + '/images/profileplaceholder.png'} width="300" height="300" alt="profile image" />
+                        <img className="img-fluid border rounded-circle mr-3" src={process.env.PUBLIC_URL + '/images/profileplaceholder.png'} height="300" alt="profile image" />
                         <Col className="mt-5 pt-5">
                             <Button className="mb-4" color="secondary" size="sm"><strong>Add Profile Picture</strong></Button>
                             <p>Must be JPEG, PNG, or GIF cannot exceed 10MB.</p>

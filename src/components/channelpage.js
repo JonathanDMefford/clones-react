@@ -22,7 +22,7 @@ function ChannelPage(props) {
                             {channel.user.name}<FontAwesomeIcon id="register" className="ml-1 mr-3" icon={faCheckSquare} />
                             <Button color="danger" size="sm"><strong>LIVE</strong></Button>
                         </CardHeader>
-                        <CardImg top width="100%" src={process.env.PUBLIC_URL + '/images/placeholder.jpg'} alt="Card image cap" />
+                        <CardImg className="img-fluid" src={process.env.PUBLIC_URL + '/images/placeholder.jpg'} alt="Card image cap" />
                         <CardBody>
                             <CardTitle><h4>{channel.title}</h4></CardTitle>
                             <CardText>Category: <Link to="/category" onClick={() => props.setCategoryPage(channel.category.id)}

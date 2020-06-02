@@ -52,7 +52,7 @@ function Navbarmenu(props) {
     return (
         <Navbar color="light" light expand="md" className="border-bottom mb-5">
             <NavbarBrand className="navbar-brand" href="#">
-                <img src={process.env.PUBLIC_URL + '/images/twitchlogo.png'} width="30" height="30" alt="" />
+                <img className="img-fluid" src={process.env.PUBLIC_URL + '/images/twitchlogo.png'} style={{ maxHeight: "30px" }} alt="" />
                 Twitch
             </NavbarBrand>
             <NavbarToggler onClick={navtoggle} />

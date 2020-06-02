@@ -47,3 +47,19 @@ a.catLink:hover {
     border-bottom-style: solid;
     padding-bottom: 15px;
 }
+
+.card {
+    overflow: scroll;
+}
+
+.card-title {
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-text {
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
